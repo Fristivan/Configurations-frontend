@@ -11,6 +11,7 @@ const Account = () => {
   const [accountData, setAccountData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const { user, loading } = useAuth();
   const navigate = useNavigate();
 
@@ -78,13 +79,21 @@ const Account = () => {
     }
   };
 
-  // Новые обработчики
   const handleSubscribe = () => {
+    if (
+      accountData?.subscription_level &&
+      accountData.subscription_level !== 'basic' &&
+      accountData.subscription_expiry &&
+      new Date(accountData.subscription_expiry) > new Date()
+    ) {
+      setShowConfirmModal(true);
+      return;
+    }
     navigate('/subscribe');
   };
 
   const handleHistory = () => {
-    navigate('/payments-history');
+    navigate('/payments');
   };
 
   const formatDate = (dateString) => {
@@ -184,7 +193,6 @@ const Account = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h2 className="text-xl font-semibold mb-4">Основная информация</h2>
-
                 <div className="space-y-4">
                   <div>
                     <p className="text-sm text-muted-foreground">Email</p>
@@ -215,7 +223,8 @@ const Account = () => {
                   {accountData.subscription_expiry && (
                     <div>
                       <p className="text-sm text-muted-foreground">Срок действия подписки</p>
-                      <p className="font-medium">{formatDate(accountData.subscription_expiry)}
+                      <p className="font-medium">
+                        {formatDate(accountData.subscription_expiry)}
                         <span className="ml-2 text-sm text-muted-foreground">
                           (Осталось: {getRemainingDays(accountData.subscription_expiry)})
                         </span>
@@ -237,7 +246,6 @@ const Account = () => {
 
               <div>
                 <h2 className="text-xl font-semibold mb-4">Использование API</h2>
-
                 <div className="space-y-4">
                   <div>
                     <p className="text-sm text-muted-foreground">Лимит запросов</p>
@@ -300,6 +308,36 @@ const Account = () => {
           <p>Нет данных для отображения</p>
         )}
       </div>
+
+      {/* Модальное окно подтверждения */}
+      {showConfirmModal && (
+        <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center">
+          <div className="bg-white dark:bg-background rounded-2xl shadow-lg p-6 max-w-md w-full border border-border">
+            <h2 className="text-lg font-semibold mb-2">Подписка уже активна</h2>
+            <p className="text-sm text-muted-foreground mb-4">
+              У вас уже есть активная подписка. Оформление новой не продлевает текущую — прежняя будет заменена.
+              Хотите продолжить?
+            </p>
+            <div className="flex justify-end space-x-3">
+              <button
+                onClick={() => setShowConfirmModal(false)}
+                className="px-4 py-2 text-sm border border-input rounded-md hover:bg-accent transition-colors"
+              >
+                Отмена
+              </button>
+              <button
+                onClick={() => {
+                  setShowConfirmModal(false);
+                  navigate('/subscribe');
+                }}
+                className="px-4 py-2 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+              >
+                Продолжить
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </PageLayout>
   );
 };

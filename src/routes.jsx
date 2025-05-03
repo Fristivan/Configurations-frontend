@@ -14,6 +14,7 @@ import WebhookSimulator from './pages/WebhookSimulator';
 import SavedConfigurations from './pages/SavedConfigurations';
 import PageLayout from './components/layout/page-layout';
 import ProtectedRoute from './components/auth/protected-route';
+import Paymenthistory from './pages/Paymenthistory';
 
 // Временные страницы для тестирования
 const TempPage = ({ title }) => (
@@ -68,6 +69,15 @@ const AppRoutes = () => (
       element={
         <ProtectedRoute>
           <Account />
+        </ProtectedRoute>
+      }
+    />
+
+    <Route
+      path="/payments"
+      element={
+        <ProtectedRoute>
+          <Paymenthistory />
         </ProtectedRoute>
       }
     />
