@@ -339,34 +339,43 @@ const Configurator = () => {
 
   // Обновленная функция сохранения конфигурации в профиль
   // Обновленная функция сохранения конфигурации в профиль
-const handleSaveToProfile = async (configName) => {
-  try {
-    // Создаем объект с данными для сохранения
-    const saveData = {
-      service: selectedTemplate.name,
-      config_name: configName, // Используем имя, предоставленное пользователем
-      config_data: configResult.content
-    };
-    
-    // Отправляем запрос на бэкенд
-    const response = await api.post('/configurations', saveData);
-    
-    // Проверяем статус ответа
-    if (response.status === 400) {
-      throw new Error('Вы превысили лимит сохраненных файлов для вашего плана');
+  const handleSaveToProfile = async (configName) => {
+    try {
+      // Получаем расширение из шаблона (по умолчанию — 'conf')
+      const extension = selectedTemplate.file_extension || 'conf';
+  
+      // Очищаем имя и добавляем расширение, если его нет
+      let finalName = configName.trim().replace(/[/\\?%*:|"<>]/g, '-');
+      if (!finalName.toLowerCase().endsWith(`.${extension.toLowerCase()}`)) {
+        finalName += `.${extension}`;
+      }
+  
+      // Создаем объект с данными для сохранения
+      const saveData = {
+        service: selectedTemplate.name,
+        config_name: finalName,
+        config_data: configResult.content
+      };
+  
+      // Отправляем запрос на бэкенд
+      const response = await api.post('/configurations', saveData);
+  
+      // Проверяем статус ответа
+      if (response.status === 400) {
+        throw new Error('Вы превысили лимит сохраненных файлов для вашего плана');
+      }
+  
+      if (!response.ok) {
+        throw new Error(response.error || 'Ошибка при сохранении конфигурации');
+      }
+  
+      return true;
+    } catch (error) {
+      console.error('Ошибка при сохранении:', error);
+      throw error;
     }
-    
-    if (!response.ok) {
-      throw new Error(response.error || 'Ошибка при сохранении конфигурации');
-    }
-    
-    // Возвращаем true для индикации успешного сохранения
-    return true;
-  } catch (error) {
-    console.error('Ошибка при сохранении:', error);
-    throw error; // Пробрасываем ошибку для обработки в модальном окне
-  }
-};
+  };
+  
 
   // Обновленная функция скачивания конфигурации с использованием имени из поля
   const handleDownload = (configName) => {
