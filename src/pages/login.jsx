@@ -17,9 +17,9 @@ const Login = () => {
 
   return (
     <PageLayout>
-      <div className="container mx-auto py-12 px-4">
-        <div className="max-w-md mx-auto bg-card p-8 rounded-lg shadow-sm">
-          <h1 className="text-2xl font-bold mb-6 text-center">Вход в систему</h1>
+      <div className="container mx-auto px-4 lg:px-8  py-12 px-4">
+        <div className="max-w-md mx-auto bg-card shadow-md rounded-2xl border border-border  p-8 rounded-lg shadow-sm">
+          <h1 className="text-3xl font-bold  font-bold mb-6 text-center">Вход в систему</h1>
           
           {successMessage && (
             <div className="mb-4 p-3 bg-green-100 text-green-700 rounded-md">

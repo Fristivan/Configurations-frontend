@@ -36,7 +36,7 @@ export default function PaymentReturn() {
   return (
     <PageLayout>
       <div className="max-w-md mx-auto p-6 bg-gray-800 text-white rounded shadow text-center">
-        <h2 className="text-2xl font-bold mb-4">Результат оплаты</h2>
+        <h2 className="text-3xl font-bold  font-bold mb-4">Результат оплаты</h2>
         {loading ? (
           <p className="text-gray-200">Проверяем статус оплаты...</p>
         ) : error ? (

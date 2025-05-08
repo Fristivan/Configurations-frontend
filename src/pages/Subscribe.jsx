@@ -37,14 +37,14 @@ export default function Subscribe() {
   return (
     <PageLayout>
       <div className="max-w-md mx-auto p-6 bg-gray-800 text-white rounded shadow">
-        <h2 className="text-2xl font-bold mb-4">Оформление подписки</h2>
+        <h2 className="text-3xl font-bold  font-bold mb-4">Оформление подписки</h2>
 
         <div className="mb-4">
           <label className="block text-sm font-medium mb-2">Выберите тариф:</label>
           <select
             value={plan}
             onChange={(e) => setPlan(e.target.value)}
-            className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white"
+            className="w-full bg-gray-700 border rounded-lg hover:shadow-md transition-all duration-200  border-gray-600 rounded px-3 py-2 text-white"
           >
             <option value="basic">Базовый ({priceMap.basic} ₽/мес)</option>
             <option value="premium">Премиум ({priceMap.premium} ₽/мес)</option>
@@ -57,7 +57,7 @@ export default function Subscribe() {
         <button
           onClick={handlePay}
           disabled={loading}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 disabled:opacity-50"
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 disabled:opacity-50 px-4 py-2 rounded-xl bg-primary text-white hover:bg-primary/90 transition-all shadow-md"
         >
           {loading ? 'Переадресация...' : `Оплатить ${priceMap[plan]} ₽`}
         </button>

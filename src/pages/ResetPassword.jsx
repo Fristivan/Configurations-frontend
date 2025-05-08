@@ -46,20 +46,20 @@ export default function ResetPassword() {
 
   return (
     <PageLayout>
-      <div className="container mx-auto py-12 px-4">
+      <div className="container mx-auto px-4 lg:px-8  py-12 px-4">
         <h1 className="text-3xl font-bold mb-6">Сброс пароля</h1>
 
         {isLoading ? (
           <div className="text-center py-8">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary mb-4" />
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border rounded-lg hover:shadow-md transition-all duration-200 -t-2 border-b-2 border-primary mb-4" />
             <p>Сброс пароля...</p>
           </div>
         ) : success ? (
-          <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md">
+          <div className="bg-green-50 border rounded-lg hover:shadow-md transition-all duration-200  border-green-200 text-green-700 px-4 py-3 rounded-md">
             <p>Пароль успешно изменён!</p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="bg-card p-6 rounded-lg shadow-sm border border-border max-w-md mx-auto space-y-4">
+          <form onSubmit={handleSubmit} className="bg-card shadow-md rounded-2xl border border-border  p-6 rounded-lg shadow-sm border rounded-lg hover:shadow-md transition-all duration-200  border-border max-w-md mx-auto space-y-4">
             <div>
               <label htmlFor="email" className="text-sm text-muted-foreground">Email</label>
               <input
@@ -68,7 +68,7 @@ export default function ResetPassword() {
                 name="email"
                 value={form.email}
                 readOnly
-                className="w-full px-4 py-2 border border-input rounded-md bg-card/30 cursor-not-allowed"
+                className="w-full px-4 py-2 border rounded-lg hover:shadow-md transition-all duration-200  border-input rounded-md bg-card shadow-md rounded-2xl border border-border /30 cursor-not-allowed px-4 py-2 border border-input rounded-md focus:outline-none focus:ring focus:ring-primary/40 transition-all"
               />
             </div>
             <div>
@@ -80,7 +80,7 @@ export default function ResetPassword() {
                 value={form.code}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-4 py-2 border rounded-lg hover:shadow-md transition-all duration-200  border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary px-4 py-2 border border-input rounded-md focus:outline-none focus:ring focus:ring-primary/40 transition-all"
               />
             </div>
             <div>
@@ -92,7 +92,7 @@ export default function ResetPassword() {
                 value={form.new_password}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-4 py-2 border rounded-lg hover:shadow-md transition-all duration-200  border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary px-4 py-2 border border-input rounded-md focus:outline-none focus:ring focus:ring-primary/40 transition-all"
               />
             </div>
             <div>
@@ -104,19 +104,19 @@ export default function ResetPassword() {
                 value={form.confirm_password}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-4 py-2 border rounded-lg hover:shadow-md transition-all duration-200  border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary px-4 py-2 border border-input rounded-md focus:outline-none focus:ring focus:ring-primary/40 transition-all"
               />
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
+              <div className="bg-red-50 border rounded-lg hover:shadow-md transition-all duration-200  border-red-200 text-red-700 px-4 py-3 rounded-md">
                 <p>{error}</p>
               </div>
             )}
 
             <button
               type="submit"
-              className="w-full bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90 transition-colors"
+              className="w-full bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90 transition-colors px-4 py-2 rounded-xl bg-primary text-white hover:bg-primary/90 transition-all shadow-md"
             >
               Изменить пароль
             </button>

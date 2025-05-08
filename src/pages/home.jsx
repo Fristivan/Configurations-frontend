@@ -1,81 +1,111 @@
 // src/pages/home.jsx
 import React from 'react';
 import PageLayout from '../components/layout/page-layout';
+import { GearIcon, MagicWandIcon, AppsIcon, CodeIcon } from '../components/icons/Index';
 
 const Home = () => {
   return (
     <PageLayout>
-      <div className="bg-gradient-to-r from-primary to-primary/80 text-white py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Генерация конфигураций в один клик</h1>
-          <p className="text-xl md:max-w-2xl mx-auto mb-10">
+      <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-24 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full opacity-10">
+          <div className="absolute -top-32 -left-32 w-64 h-64 bg-primary/20 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 right-0 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 lg:px-8 text-center relative">
+          <div className="mb-8 animate-float">
+            <MagicWandIcon className="w-20 h-20 mx-auto text-primary drop-shadow-xl" />
+          </div>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
+            Генерация конфигураций в один клик
+          </h1>
+          <p className="text-xl text-gray-300 md:max-w-2xl mx-auto mb-10">
             Наш сервис позволяет быстро создавать оптимальные конфигурации для любых приложений 
             на основе ваших требований, экономя ваше время и усилия.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="/configurator" className="px-6 py-3 bg-white text-primary font-medium rounded-md hover:bg-gray-100 transition-colors">
+            <a 
+              href="/configurator" 
+              className="px-8 py-4 bg-primary hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/20 rounded-lg font-medium flex items-center gap-2"
+            >
+              <GearIcon className="w-5 h-5" />
               Попробовать
             </a>
-            <a href="/login" className="px-6 py-3 border border-white text-white font-medium rounded-md hover:bg-white/10 transition-colors">
+            <a 
+              href="/login" 
+              className="px-8 py-4 border border-gray-600 hover:border-primary hover:text-primary transition-all duration-300 rounded-lg font-medium"
+            >
               Войти
             </a>
           </div>
         </div>
       </div>
 
-      <div className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Ключевые возможности</h2>
+      <div className="py-20 bg-gray-900/50">
+        <div className="container mx-auto px-4 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-primary to-gray-400">
+            Ключевые возможности
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Карточка фичи 1 */}
-            <div className="p-6 bg-card rounded-lg shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-primary/10 text-primary flex items-center justify-center rounded-lg mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5" />
-                </svg>
+            <div className="p-8 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 hover:border-primary/30 transition-all duration-300 group">
+              <div className="w-14 h-14 bg-primary/10 text-primary flex items-center justify-center rounded-xl mb-6 transition-colors group-hover:bg-primary/20">
+                <AppsIcon className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Простая настройка</h3>
-              <p className="text-muted-foreground">Интуитивно понятный интерфейс для создания конфигураций. Не требует специальных технических знаний.</p>
+              <h3 className="text-2xl font-semibold mb-4 text-gray-100">Простая настройка</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Интуитивно понятный интерфейс для создания конфигураций. Не требует специальных технических знаний.
+              </p>
             </div>
 
             {/* Карточка фичи 2 */}
-            <div className="p-6 bg-card rounded-lg shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-primary/10 text-primary flex items-center justify-center rounded-lg mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
-                </svg>
+            <div className="p-8 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 hover:border-primary/30 transition-all duration-300 group">
+              <div className="w-14 h-14 bg-primary/10 text-primary flex items-center justify-center rounded-xl mb-6 transition-colors group-hover:bg-primary/20">
+                <CodeIcon className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Множество приложений</h3>
-              <p className="text-muted-foreground">Поддержка различных типов приложений и программного обеспечения с постоянно растущим списком.</p>
+              <h3 className="text-2xl font-semibold mb-4 text-gray-100">Множество приложений</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Поддержка различных типов приложений и ПО с постоянно растущим списком.
+              </p>
             </div>
 
             {/* Карточка фичи 3 */}
-            <div className="p-6 bg-card rounded-lg shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-primary/10 text-primary flex items-center justify-center rounded-lg mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
-                </svg>
+            <div className="p-8 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 hover:border-primary/30 transition-all duration-300 group">
+              <div className="w-14 h-14 bg-primary/10 text-primary flex items-center justify-center rounded-xl mb-6 transition-colors group-hover:bg-primary/20">
+                <GearIcon className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Гибкий API</h3>
-              <p className="text-muted-foreground">Мощный API для интеграции с вашими существующими системами и автоматизации рабочих процессов.</p>
+              <h3 className="text-2xl font-semibold mb-4 text-gray-100">Гибкий API</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Мощный API для интеграции с вашими системами и автоматизации рабочих процессов.
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="bg-primary text-primary-foreground py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">Начните настраивать ваши приложения прямо сейчас</h2>
-          <p className="text-xl max-w-2xl mx-auto mb-8">
-            Присоединяйтесь к тысячам пользователей, которые уже упростили процесс настройки своих приложений с помощью ConfigGen.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a href="/configurator" className="px-6 py-3 bg-white text-primary font-medium rounded-md hover:bg-gray-100 transition-colors">
-              Начать бесплатно
-            </a>
-            <a href="/docs" className="px-6 py-3 border border-white text-white font-medium rounded-md hover:bg-white/10 transition-colors">
-              Изучить документацию
-            </a>
+      <div className="bg-gradient-to-br from-gray-900 to-gray-800 py-24">
+        <div className="container mx-auto px-4 lg:px-8 text-center">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-gray-100">
+              Начните настраивать приложения прямо сейчас
+            </h2>
+            <p className="text-xl text-gray-400 mb-12">
+              Присоединяйтесь к тысячам пользователей, которые уже упростили процесс настройки своих приложений.
+            </p>
+            <div className="flex flex-wrap justify-center gap-6">
+              <a 
+                href="/configurator" 
+                className="px-8 py-4 bg-primary hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/20 rounded-lg font-medium"
+              >
+                Начать бесплатно
+              </a>
+              <a 
+                href="/docs" 
+                className="px-8 py-4 border border-gray-600 hover:border-primary hover:text-primary transition-all duration-300 rounded-lg font-medium"
+              >
+                Изучить документацию
+              </a>
+            </div>
           </div>
         </div>
       </div>

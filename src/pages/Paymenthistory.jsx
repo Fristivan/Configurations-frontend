@@ -61,24 +61,24 @@ const PaymentsHistory = () => {
 
   return (
     <PageLayout>
-      <div className="container mx-auto py-12 px-4">
+      <div className="container mx-auto px-4 lg:px-8  py-12 px-4">
         <h1 className="text-3xl font-bold mb-6">История платежей</h1>
 
         {isLoading ? (
           <div className="text-center py-8">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary mb-4"></div>
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border rounded-lg hover:shadow-md transition-all duration-200 -t-2 border-b-2 border-primary mb-4"></div>
             <p>Загрузка истории...</p>
           </div>
         ) : error ? (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
+          <div className="bg-red-50 border rounded-lg hover:shadow-md transition-all duration-200  border-red-200 text-red-700 px-4 py-3 rounded-md">
             <p>{error}</p>
           </div>
         ) : payments.length > 0 ? (
-          <div className="bg-card p-6 rounded-lg shadow-sm border border-border">
+          <div className="bg-card shadow-md rounded-2xl border border-border  p-6 rounded-lg shadow-sm border rounded-lg hover:shadow-md transition-all duration-200  border-border">
             <div className="overflow-x-auto">
               <table className="min-w-full text-sm">
                 <thead>
-                  <tr className="text-left border-b border-border">
+                  <tr className="text-left border rounded-lg hover:shadow-md transition-all duration-200 -b border-border">
                     <th className="py-2 px-3">Дата</th>
                     <th className="py-2 px-3">Сумма</th>
                     <th className="py-2 px-3">Статус</th>
@@ -86,7 +86,7 @@ const PaymentsHistory = () => {
                 </thead>
                 <tbody>
                   {payments.map((payment, idx) => (
-                    <tr key={idx} className="border-b border-border">
+                    <tr key={idx} className="border rounded-lg hover:shadow-md transition-all duration-200 -b border-border">
                       <td className="py-2 px-3 whitespace-nowrap">{formatDate(payment.created_at)}</td>
                       <td className="py-2 px-3">{payment.amount} {payment.currency || 'RUB'}</td>
                       <td className="py-2 px-3">

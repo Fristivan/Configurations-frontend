@@ -132,6 +132,36 @@ const Account = () => {
     return 'дней';
   };
 
+  // Функция для определения цвета прогресс-бара в зависимости от процента использования
+  const getProgressBarColor = (percent) => {
+    if (percent <= 30) return 'bg-green-500';
+    if (percent <= 70) return 'bg-blue-500';
+    if (percent <= 90) return 'bg-yellow-500';
+    return 'bg-red-500';
+  };
+
+  const getSubscriptionBadgeStyle = (level) => {
+    switch (level) {
+      case 'premium':
+        return 'bg-amber-200 text-amber-900 border border-amber-300';
+      case 'professional':
+        return 'bg-purple-200 text-purple-900 border border-purple-300';
+      default:
+        return 'bg-blue-200 text-blue-900 border border-blue-300';
+    }
+  };
+
+  const getSubscriptionName = (level) => {
+    switch (level) {
+      case 'premium':
+        return 'Премиум';
+      case 'professional':
+        return 'Профессиональный';
+      default:
+        return 'Базовый';
+    }
+  };
+
   const handleRefresh = () => {
     RequestCache.clear(`${api.API_URL}/account/info`);
     setError(null);
@@ -160,7 +190,7 @@ const Account = () => {
   if (loading) {
     return (
       <PageLayout>
-        <div className="container mx-auto py-12 px-4 text-center">
+        <div className="container mx-auto px-4 lg:px-8 py-12 text-center">
           <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary mb-4"></div>
           <p>Проверка авторизации...</p>
         </div>
@@ -170,7 +200,7 @@ const Account = () => {
 
   return (
     <PageLayout>
-      <div className="container mx-auto py-12 px-4">
+      <div className="container mx-auto px-4 lg:px-8 py-12">
         <h1 className="text-3xl font-bold mb-6">Информация об аккаунте</h1>
 
         {isLoading ? (
@@ -179,42 +209,34 @@ const Account = () => {
             <p>Загрузка информации...</p>
           </div>
         ) : error ? (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
+          <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-lg shadow-sm">
             <p>{error}</p>
             <button
-              className="mt-2 text-sm underline hover:no-underline"
+              className="mt-4 text-sm px-5 py-2 rounded-lg bg-primary/90 text-white hover:bg-primary/70 font-semibold shadow-md transition-all"
               onClick={handleRefresh}
             >
               Повторить загрузку
             </button>
           </div>
         ) : accountData ? (
-          <div className="bg-card p-6 rounded-lg shadow-sm border border-border">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <h2 className="text-xl font-semibold mb-4">Основная информация</h2>
-                <div className="space-y-4">
+          <div className="bg-card shadow-md rounded-2xl border border-border p-7">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-background/50 p-5 rounded-xl border border-border/50 shadow-sm">
+                <h2 className="text-2xl font-semibold mb-5">Основная информация</h2>
+                <div className="space-y-5">
                   <div>
-                    <p className="text-sm text-muted-foreground">Email</p>
-                    <p className="font-medium">{accountData.email}</p>
+                    <p className="text-sm text-muted-foreground mb-1">Email</p>
+                    <p className="font-semibold">{accountData.email}</p>
                   </div>
 
                   {accountData.subscription_level && (
                     <div>
-                      <p className="text-sm text-muted-foreground">Уровень подписки</p>
+                      <p className="text-sm text-muted-foreground mb-1">Уровень подписки</p>
                       <div className="flex items-center">
-                        <span className={`inline-block py-1 px-3 rounded-full text-xs font-medium ${
-                          accountData.subscription_level === 'premium'
-                            ? 'bg-yellow-100 text-yellow-800'
-                            : accountData.subscription_level === 'professional'
-                              ? 'bg-purple-100 text-purple-800'
-                              : 'bg-blue-100 text-blue-800'
+                        <span className={`inline-block py-1.5 px-4 rounded-full text-xs font-semibold ${
+                          getSubscriptionBadgeStyle(accountData.subscription_level)
                         }`}>
-                          {accountData.subscription_level === 'premium'
-                            ? 'Премиум'
-                            : accountData.subscription_level === 'professional'
-                              ? 'Профессиональный'
-                              : 'Базовый'}
+                          {getSubscriptionName(accountData.subscription_level)}
                         </span>
                       </div>
                     </div>
@@ -222,8 +244,8 @@ const Account = () => {
 
                   {accountData.subscription_expiry && (
                     <div>
-                      <p className="text-sm text-muted-foreground">Срок действия подписки</p>
-                      <p className="font-medium">
+                      <p className="text-sm text-muted-foreground mb-1">Срок действия подписки</p>
+                      <p className="font-semibold">
                         {formatDate(accountData.subscription_expiry)}
                         <span className="ml-2 text-sm text-muted-foreground">
                           (Осталось: {getRemainingDays(accountData.subscription_expiry)})
@@ -233,10 +255,10 @@ const Account = () => {
                   )}
 
                   <div>
-                    <p className="text-sm text-muted-foreground">Пароль</p>
+                    <p className="text-sm text-muted-foreground mb-1">Пароль</p>
                     <button
                       onClick={handlePasswordReset}
-                      className="text-primary text-sm hover:underline mt-1 inline-block"
+                      className="mt-1 px-5 py-2 rounded-lg bg-primary/90 text-white hover:bg-primary/70 transition-all shadow-md font-semibold"
                     >
                       Сменить пароль
                     </button>
@@ -244,41 +266,43 @@ const Account = () => {
                 </div>
               </div>
 
-              <div>
-                <h2 className="text-xl font-semibold mb-4">Использование API</h2>
-                <div className="space-y-4">
+              <div className="bg-background/50 p-5 rounded-xl border border-border/50 shadow-sm">
+                <h2 className="text-2xl font-semibold mb-5">Использование API</h2>
+                <div className="space-y-5">
                   <div>
-                    <p className="text-sm text-muted-foreground">Лимит запросов</p>
-                    <p className="font-medium">{accountData.request_limit} запросов / месяц</p>
+                    <p className="text-sm text-muted-foreground mb-1">Лимит запросов</p>
+                    <p className="font-semibold">{accountData.request_limit} запросов / месяц</p>
                   </div>
 
                   <div>
-                    <p className="text-sm text-muted-foreground">Использовано в этом месяце</p>
+                    <p className="text-sm text-muted-foreground mb-2">Использовано в этом месяце</p>
                     <div className="mt-1">
-                      <div className="w-full bg-muted rounded-full h-2.5">
-                        <div
-                          className={`h-2.5 rounded-full ${
-                            (accountData.requests_this_month / accountData.request_limit) > 0.9
-                              ? 'bg-red-500'
-                              : (accountData.requests_this_month / accountData.request_limit) > 0.7
-                                ? 'bg-yellow-500'
-                                : 'bg-primary'
-                          }`}
-                          style={{
-                            width: `${Math.min(100, (accountData.requests_this_month / accountData.request_limit) * 100)}%`
-                          }}
-                        ></div>
+                      {/* Улучшенный прогресс-бар с динамическим изменением цвета */}
+                      <div className="w-full bg-muted rounded-full h-3 shadow-inner">
+                        {(() => {
+                          const percent = Math.min(100, (accountData.requests_this_month / accountData.request_limit) * 100);
+                          return (
+                            <div
+                              className={`h-3 rounded-full ${getProgressBarColor(percent)} transition-all duration-300`}
+                              style={{
+                                width: `${percent}%`
+                              }}
+                            ></div>
+                          );
+                        })()}
                       </div>
-                      <p className="text-sm mt-1">
+                      <p className="text-sm mt-2">
                         {accountData.requests_this_month} из {accountData.request_limit}
-                        ({Math.round((accountData.requests_this_month / accountData.request_limit) * 100)}%)
+                        <span className="ml-2 font-semibold">
+                          ({Math.round((accountData.requests_this_month / accountData.request_limit) * 100)}%)
+                        </span>
                       </p>
                     </div>
                   </div>
 
                   <div>
-                    <p className="text-sm text-muted-foreground">Сброс лимитов</p>
-                    <p className="font-medium">
+                    <p className="text-sm text-muted-foreground mb-1">Сброс лимитов</p>
+                    <p className="font-semibold">
                       {formatDate(accountData.limit_reset_date)}
                       <span className="ml-2 text-sm text-muted-foreground">
                         (Через: {getRemainingDays(accountData.limit_reset_date)})
@@ -289,39 +313,41 @@ const Account = () => {
               </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-border flex space-x-4">
+            <div className="mt-8 pt-6 border-t border-border flex flex-wrap gap-4">
               <button
                 onClick={handleSubscribe}
-                className="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90 transition-colors text-sm"
+                className="bg-primary/90 text-white px-6 py-2.5 rounded-lg hover:bg-primary/70 transition-all text-sm font-semibold shadow-md"
               >
                 Сменить тариф
               </button>
               <button
                 onClick={handleHistory}
-                className="border border-input bg-background px-4 py-2 rounded-md hover:bg-accent transition-colors text-sm"
+                className="border border-primary bg-primary/15 text-primary px-6 py-2.5 rounded-lg hover:bg-primary/25 transition-all text-sm font-semibold shadow-sm"
               >
                 История платежей
               </button>
             </div>
           </div>
         ) : (
-          <p>Нет данных для отображения</p>
+          <div className="bg-card shadow-md rounded-2xl border border-border p-6">
+            <p className="text-center py-4 text-muted-foreground">Нет данных для отображения</p>
+          </div>
         )}
       </div>
 
       {/* Модальное окно подтверждения */}
       {showConfirmModal && (
-        <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center">
-          <div className="bg-white dark:bg-background rounded-2xl shadow-lg p-6 max-w-md w-full border border-border">
-            <h2 className="text-lg font-semibold mb-2">Подписка уже активна</h2>
-            <p className="text-sm text-muted-foreground mb-4">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center">
+          <div className="bg-card rounded-2xl shadow-lg p-6 max-w-md w-full border border-border animate-in fade-in duration-200">
+            <h2 className="text-xl font-semibold mb-3">Подписка уже активна</h2>
+            <p className="text-sm text-muted-foreground mb-5">
               У вас уже есть активная подписка. Оформление новой не продлевает текущую — прежняя будет заменена.
               Хотите продолжить?
             </p>
-            <div className="flex justify-end space-x-3">
+            <div className="flex justify-end space-x-4">
               <button
                 onClick={() => setShowConfirmModal(false)}
-                className="px-4 py-2 text-sm border border-input rounded-md hover:bg-accent transition-colors"
+                className="px-5 py-2 text-sm border border-input rounded-lg hover:bg-accent/50 transition-colors font-semibold"
               >
                 Отмена
               </button>
@@ -330,7 +356,7 @@ const Account = () => {
                   setShowConfirmModal(false);
                   navigate('/subscribe');
                 }}
-                className="px-4 py-2 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                className="px-5 py-2 text-sm bg-primary/90 text-white rounded-lg hover:bg-primary/70 transition-colors font-semibold shadow-md"
               >
                 Продолжить
               </button>

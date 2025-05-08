@@ -11,7 +11,7 @@ const TemplateCard = ({ template, onClick }) => {
   
   return (
     <div 
-      className="bg-card rounded-lg p-6 border border-border hover:shadow-md transition-all cursor-pointer"
+      className="bg-card shadow-md rounded-2xl border border-border  rounded-lg p-6 border rounded-lg hover:shadow-md transition-all duration-200  border-border hover:shadow-md transition-all cursor-pointer"
       onClick={() => onClick(template)}
     >
       <div className="flex flex-col items-center text-center">
@@ -28,10 +28,10 @@ const TemplateCard = ({ template, onClick }) => {
         ) : (
           // Если иконки нет или ошибка, показываем первую букву названия
           <div className="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-4">
-            <span className="text-2xl font-bold">{template.name.charAt(0).toUpperCase()}</span>
+            <span className="text-3xl font-bold  font-bold">{template.name.charAt(0).toUpperCase()}</span>
           </div>
         )}
-        <h3 className="text-xl font-semibold mb-2">{template.name}</h3>
+        <h3 className="text-2xl  font-semibold mb-2">{template.name}</h3>
         <p className="text-muted-foreground text-sm">{template.description}</p>
         <div className="mt-2 text-xs text-muted-foreground">{`.${template.file_extension}`}</div>
       </div>
@@ -80,8 +80,8 @@ const ResultModal = ({ isOpen, onClose, result, onSave, onDownload }) => {
       <div className="bg-background rounded-lg shadow-lg w-full max-w-4xl max-h-[90vh] overflow-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Конфигурация для {result.serviceName}</h2>
-            <button onClick={onClose} className="text-muted-foreground hover:text-foreground">
+            <h2 className="text-2xl  font-semibold">Конфигурация для {result.serviceName}</h2>
+            <button onClick={onClose} className="text-muted-foreground hover:text-foreground px-4 py-2 rounded-xl bg-primary text-white hover:bg-primary/90 transition-all shadow-md">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -91,7 +91,7 @@ const ResultModal = ({ isOpen, onClose, result, onSave, onDownload }) => {
           <div className="flex justify-between items-center mb-2">
             <span className="text-sm font-medium text-muted-foreground">{result.format}</span>
             <button 
-              className="text-sm text-primary hover:underline flex items-center"
+              className="text-sm text-primary hover:underline flex items-center px-4 py-2 rounded-xl bg-primary text-white hover:bg-primary/90 transition-all shadow-md"
               onClick={() => navigator.clipboard.writeText(result.content)}
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mr-1">
@@ -115,7 +115,7 @@ const ResultModal = ({ isOpen, onClose, result, onSave, onDownload }) => {
               type="text"
               value={configName}
               onChange={(e) => setConfigName(e.target.value)}
-              className="w-full px-3 py-2 border rounded-md border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full px-3 py-2 border rounded-lg hover:shadow-md transition-all duration-200  rounded-md border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
               placeholder="Введите название для сохранения"
             />
           </div>
@@ -128,7 +128,7 @@ const ResultModal = ({ isOpen, onClose, result, onSave, onDownload }) => {
             >
               {saveStatus === 'saving' ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                  <div className="w-4 h-4 border rounded-lg hover:shadow-md transition-all duration-200 -2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
                   Сохранение...
                 </>
               ) : (
@@ -141,7 +141,7 @@ const ResultModal = ({ isOpen, onClose, result, onSave, onDownload }) => {
               )}
             </button>
             <button 
-              className="flex-1 border border-input bg-background py-2 px-4 rounded-md hover:bg-accent transition-colors text-sm flex items-center justify-center"
+              className="flex-1 border rounded-lg hover:shadow-md transition-all duration-200  border-input bg-background py-2 px-4 rounded-md hover:bg-accent transition-colors text-sm flex items-center justify-center px-4 py-2 rounded-xl bg-primary text-white hover:bg-primary/90 transition-all shadow-md"
               onClick={() => onDownload(configName)}
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mr-1">
@@ -153,7 +153,7 @@ const ResultModal = ({ isOpen, onClose, result, onSave, onDownload }) => {
           
           {/* Сообщение об успешном сохранении */}
           {saveStatus === 'success' && (
-            <div className="mt-3 p-2 bg-green-50 border border-green-200 text-green-700 rounded-md text-sm flex items-center">
+            <div className="mt-3 p-2 bg-green-50 border rounded-lg hover:shadow-md transition-all duration-200  border-green-200 text-green-700 rounded-md text-sm flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -163,7 +163,7 @@ const ResultModal = ({ isOpen, onClose, result, onSave, onDownload }) => {
           
           {/* Сообщение об ошибке */}
           {saveStatus === 'error' && (
-            <div className="mt-3 p-2 bg-red-50 border border-red-200 text-red-700 rounded-md text-sm flex items-center">
+            <div className="mt-3 p-2 bg-red-50 border rounded-lg hover:shadow-md transition-all duration-200  border-red-200 text-red-700 rounded-md text-sm flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
               </svg>
@@ -479,10 +479,10 @@ const Configurator = () => {
           {children}
         </div>
         {isVisible && (
-          <div className="absolute z-50 w-64 p-2 bg-background text-foreground text-sm rounded-md shadow-lg border border-border left-0 top-full mt-1">
+          <div className="absolute z-50 w-64 p-2 bg-background text-foreground text-sm rounded-md shadow-lg border rounded-lg hover:shadow-md transition-all duration-200  border-border left-0 top-full mt-1">
             {text}
             {type && (
-              <div className="mt-1 pt-1 border-t border-border">
+              <div className="mt-1 pt-1 border rounded-lg hover:shadow-md transition-all duration-200 -t border-border">
                 <span className="text-xs font-medium text-muted-foreground">Тип данных: {type}</span>
               </div>
             )}
@@ -549,7 +549,7 @@ const Configurator = () => {
               type="checkbox"
               checked={!!formValues[field.name]}
               onChange={handleInputChange}
-              className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+              className="h-4 w-4 rounded border rounded-lg hover:shadow-md transition-all duration-200 -gray-300 text-primary focus:ring-primary px-4 py-2 border border-input rounded-md focus:outline-none focus:ring focus:ring-primary/40 transition-all"
             />
             <span className="ml-2 text-sm">Включить</span>
           </div>
@@ -631,7 +631,7 @@ const Configurator = () => {
                 handleArrayInputChange(field.name, lines);
               }}
               placeholder={exampleItems.length > 0 ? `${placeholderText}\n${exampleItems.join('\n')}` : placeholderText}
-              className="w-full px-3 py-2 border rounded-md border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring min-h-[100px]"
+              className="w-full px-3 py-2 border rounded-lg hover:shadow-md transition-all duration-200  rounded-md border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring min-h-[100px]"
               required={field.required}
             />
           );
@@ -706,7 +706,7 @@ const Configurator = () => {
                 handleArrayInputChange(field.name, newObj);
               }}
               placeholder={examplePairs.length > 0 ? `${placeholderText}\n${examplePairs.join('\n')}` : placeholderText}
-              className="w-full px-3 py-2 border rounded-md border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring min-h-[100px]"
+              className="w-full px-3 py-2 border rounded-lg hover:shadow-md transition-all duration-200  rounded-md border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring min-h-[100px]"
               required={field.required}
             />
           );
@@ -736,7 +736,7 @@ const Configurator = () => {
               value={formValues[field.name] || ''}
               onChange={handleInputChange}
               placeholder={placeholder}
-              className="w-full px-3 py-2 border rounded-md border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full px-3 py-2 border rounded-lg hover:shadow-md transition-all duration-200  rounded-md border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring px-4 py-2 border border-input rounded-md focus:outline-none focus:ring focus:ring-primary/40 transition-all"
               required={field.required}
             />
           );
@@ -781,7 +781,7 @@ const Configurator = () => {
         
         {/* Зависимые поля (показываются только если чекбокс включен) */}
         {formValues[field.name] === true && dependentFieldNames.length > 0 && (
-          <div className="pl-4 border-l-2 border-primary/30 space-y-3 mt-2 transition-all duration-300">
+          <div className="pl-4 border rounded-lg hover:shadow-md transition-all duration-200 -l-2 border-primary/30 space-y-3 mt-2 transition-all duration-300">
             {dependentFieldNames.map(dependentName => {
               // Находим полное определение зависимого поля
               const dependentField = formFields.find(f => f.name === dependentName);
@@ -808,7 +808,7 @@ const Configurator = () => {
 
   return (
     <PageLayout>
-      <div className="container mx-auto py-12 px-4">
+      <div className="container mx-auto px-4 lg:px-8  py-12 px-4">
         <h1 className="text-3xl font-bold mb-2">Создать конфигурацию</h1>
         <p className="text-muted-foreground mb-8">
           Выберите шаблон, для которого вы хотите создать конфигурацию, и заполните необходимые параметры.
@@ -817,11 +817,11 @@ const Configurator = () => {
         {/* Индикатор загрузки шаблонов */}
         {isLoadingTemplates ? (
           <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary mb-4"></div>
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border rounded-lg hover:shadow-md transition-all duration-200 -t-2 border-b-2 border-primary mb-4"></div>
             <p>Загрузка доступных шаблонов...</p>
           </div>
         ) : errorMessage ? (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md mb-8">
+          <div className="bg-red-50 border rounded-lg hover:shadow-md transition-all duration-200  border-red-200 text-red-700 px-4 py-3 rounded-md mb-8">
             <p>{errorMessage}</p>
           </div>
         ) : (
@@ -849,7 +849,7 @@ const Configurator = () => {
             <div className="bg-background rounded-lg shadow-lg w-full max-w-md max-h-[90vh] overflow-auto">
               <div className="p-6">
                 <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-xl font-semibold">Настройка {selectedTemplate.name}</h2>
+                  <h2 className="text-2xl  font-semibold">Настройка {selectedTemplate.name}</h2>
                   <button 
                     onClick={() => setIsModalOpen(false)}
                     className="text-muted-foreground hover:text-foreground"
@@ -861,14 +861,14 @@ const Configurator = () => {
                 </div>
                 
                 {errorMessage && (
-                  <div className="mb-4 p-3 bg-red-100 border border-red-300 text-red-700 rounded-md">
+                  <div className="mb-4 p-3 bg-red-100 border rounded-lg hover:shadow-md transition-all duration-200  border-red-300 text-red-700 rounded-md">
                     <p className="text-sm">{errorMessage}</p>
                   </div>
                 )}
                 
                 {isLoadingFields ? (
                   <div className="py-8 text-center">
-                    <div className="inline-block animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-primary mb-4"></div>
+                    <div className="inline-block animate-spin rounded-full h-10 w-10 border rounded-lg hover:shadow-md transition-all duration-200 -t-2 border-b-2 border-primary mb-4"></div>
                     <p className="text-lg">Загрузка формы...</p>
                   </div>
                 ) : (
@@ -912,7 +912,7 @@ const Configurator = () => {
                     
                     {/* Дополнительные настройки */}
                     {showAdvanced && (
-                      <div className="space-y-6 pt-2 border-t border-border">
+                      <div className="space-y-6 pt-2 border rounded-lg hover:shadow-md transition-all duration-200 -t border-border">
                         {/* Дополнительные поля */}
                         <div className="space-y-4 mt-4">
                           {groupedFields.advanced.map(field => (
@@ -934,14 +934,14 @@ const Configurator = () => {
                       <button
                         type="button"
                         onClick={() => setIsModalOpen(false)}
-                        className="flex-1 border border-input bg-background py-2 rounded-md hover:bg-accent transition-colors"
+                        className="flex-1 border rounded-lg hover:shadow-md transition-all duration-200  border-input bg-background py-2 rounded-md hover:bg-accent transition-colors"
                       >
                         Отмена
                       </button>
                       <button
                         type="submit"
                         disabled={isLoading}
-                        className="flex-1 bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors disabled:opacity-50"
+                        className="flex-1 bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors disabled:opacity-50 px-4 py-2 rounded-xl bg-primary text-white hover:bg-primary/90 transition-all shadow-md"
                       >
                         {isLoading ? 'Генерация...' : 'Создать конфигурацию'}
                       </button>

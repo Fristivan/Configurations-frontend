@@ -41,7 +41,7 @@ export default function WebhookSimulator() {
   return (
     <PageLayout>
       <div className="max-w-md mx-auto p-6 bg-gray-800 text-white rounded shadow">
-        <h2 className="text-2xl font-bold mb-4">Эмулятор Webhook</h2>
+        <h2 className="text-3xl font-bold  font-bold mb-4">Эмулятор Webhook</h2>
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium mb-1">Order ID</label>
@@ -49,7 +49,7 @@ export default function WebhookSimulator() {
               type="text"
               value={orderId}
               onChange={(e) => setOrderId(e.target.value)}
-              className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white"
+              className="w-full bg-gray-700 border rounded-lg hover:shadow-md transition-all duration-200  border-gray-600 rounded px-3 py-2 text-white"
               placeholder="Введите order_id"
             />
           </div>
@@ -59,13 +59,13 @@ export default function WebhookSimulator() {
               type="text"
               value={paymentId}
               onChange={(e) => setPaymentId(e.target.value)}
-              className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white"
+              className="w-full bg-gray-700 border rounded-lg hover:shadow-md transition-all duration-200  border-gray-600 rounded px-3 py-2 text-white"
               placeholder="Введите payment_id (необязательно)"
             />
           </div>
           <button
             onClick={handleSimulate}
-            className="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+            className="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50 px-4 py-2 rounded-xl bg-primary text-white hover:bg-primary/90 transition-all shadow-md"
             disabled={loading || !orderId}
           >
             {loading ? 'Отправка...' : 'Эмулировать Webhook'}
