@@ -1,7 +1,7 @@
 // src/lib/api.js
 import RequestCache from './request-cache';
 
-const API_URL = 'http://localhost:8000';
+const API_URL = 'https://api-configen.frist-it.online/api';
 
 // Флаги для отслеживания запросов в процессе
 let isCheckingAuthInProgress = false;

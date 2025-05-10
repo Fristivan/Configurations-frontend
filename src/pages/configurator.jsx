@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PageLayout from '../components/layout/page-layout';
 import { api } from '../lib/api';
 
-// Базовый URL для API
-const BASE_API_URL = 'http://localhost:8000';
-
 // Компонент карточки шаблона с поддержкой иконок
 const TemplateCard = ({ template, onClick }) => {
   const [imageError, setImageError] = useState(false);

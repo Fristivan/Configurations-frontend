@@ -2,7 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-// https://vitejs.dev/config/
+const API_BASE = process.env.VITE_API_URL || '/api'
+
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -10,20 +11,17 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  server: {
-    port: 3000,
-    open: true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
-  // Добавьте следующую конфигурацию при необходимости
   build: {
     outDir: 'dist',
   },
   publicDir: 'public',
+  server: {
+    proxy: {
+      '/api': {
+        target: API_BASE,
+        changeOrigin: true,
+        secure: false
+      }
+    }
+  }
 })
