@@ -25,7 +25,7 @@ const PaymentsHistory = () => {
       try {
         setIsLoading(true);
         setError(null);
-        const response = await api.get('/payments/');
+        const response = await api.get('/payments');
 
         if (!response.ok) {
           throw new Error(`Ошибка получения истории платежей: ${response.status}`);

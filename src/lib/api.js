@@ -63,7 +63,7 @@ const authorizedFetch = async (url, options = {}) => {
 
 export const authAPI = {
   login: async (email, password) => {
-    const url = `${API_URL}/auth/login/`;
+    const url = `${API_URL}/auth/login`;
     
     return RequestCache.execute(url, async () => {
       try {
@@ -90,7 +90,7 @@ export const authAPI = {
   },
   
   refresh: async () => {
-    const url = `${API_URL}/auth/refresh/`;
+    const url = `${API_URL}/auth/refresh`;
     
     return RequestCache.execute(url, async () => {
       if (isRefreshingInProgress) {
@@ -135,7 +135,7 @@ export const authAPI = {
   },
   
   registerRequestCode: async (email, password) => {
-    const url = `${API_URL}/register/request-code/`;
+    const url = `${API_URL}/register/request-code`;
     
     return RequestCache.execute(url, async () => {
       const response = await fetch(url, {
@@ -157,7 +157,7 @@ export const authAPI = {
   },
   
   registerVerify: async (email, code) => {
-    const url = `${API_URL}/register/verify/`;
+    const url = `${API_URL}/register/verify`;
     
     return RequestCache.execute(url, async () => {
       const response = await fetch(url, {
@@ -179,7 +179,7 @@ export const authAPI = {
   },
   
   logout: async () => {
-    const url = `${API_URL}/auth/logout/`;
+    const url = `${API_URL}/auth/logout`;
     
     return RequestCache.execute(url, async () => {
       try {
@@ -201,7 +201,7 @@ export const authAPI = {
     // В api.js, метод checkAuth:
   checkAuth: async () => {
     const cacheBuster = new Date().getTime();
-    const url = `${API_URL}/auth/verify/?_=${cacheBuster}`;
+    const url = `${API_URL}/auth/verify?_=${cacheBuster}`;
     
     return RequestCache.execute(url, async () => {
       // Проверяем кэшированное состояние авторизации
